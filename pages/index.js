@@ -24,37 +24,40 @@ const Home = ({ children }) => {
 
   useEffect(() => {
     if (error) {
-      setMensaje(error.message);
-      // Redirige solo si hay un error
-      router.push("/login");
-      // Limpia el mensaje después de 3 segundos
-      setTimeout(() => {
-        setMensaje(null);
-      }, 3000);
+      setMensaje("Debes iniciar sesión para ver los clientes.");
     }
-  }, [error, router]);
+  }, [error]);
 
-  const mostrarMensaje = () => {
-    return (
-      <div className='flex items-center mt-5 justify-between bg-gray-300 mt-10 my-2 border-l-4 border-red-500 text-red-600 p-2 text-sm font-bold w-full max-w-sm text-center mx-auto'>
-        <p>{mensaje}</p>
-      </div>
-    );
+  const handleRedirect = () => {
+    router.push("/login");
   };
 
   if (loading) return <p className="text-center text-lg">Cargando...</p>;
 
   return (
     <>
-        <Layout>
-          <h1 className="text-2xl text-gray-800 font-light">Clientes</h1>
+      <Layout>
+        <h1 className="text-2xl text-gray-800 font-light">Clientes</h1>
 
-          <Link
-            href="/nuevocliente"
-            className="py-2 px-5 mt-3 inline-block text-black bg-gray-500 rounded text-sm hover:bg-gray-800 mb-3 uppercase font-bold w-full lg:w-auto text-center"
-          >
-            Nuevo Cliente
-          </Link>
+        <Link
+          href="/nuevocliente"
+          className="py-2 px-5 mt-3 inline-block text-black bg-gray-500 rounded text-sm hover:bg-gray-800 mb-3 uppercase font-bold w-full lg:w-auto text-center"
+        >
+          Nuevo Cliente
+        </Link>
+
+        {mensaje && (
+          <div className="flex flex-col items-center bg-red-100 text-red-700 p-4 mt-5 rounded">
+            <p>{mensaje}</p>
+            <button
+              onClick={handleRedirect}
+              className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+            >
+              Iniciar Sesión
+            </button>
+          </div>
+        )}
+
         <div className="overflow-x-scroll">
           <table className="sm:table-auto shadow-md mt-10 w-full w-lg">
             <thead className="bg-gray-800">
@@ -68,15 +71,23 @@ const Home = ({ children }) => {
             </thead>
 
             <tbody className="bg-white">
-              {data.obtenerClientesVendedor.map((cliente) => (
-                <Cliente key={cliente.id} cliente={cliente} />
-              ))}
+              {!data || !data.obtenerClientesVendedor ? (
+                <tr>
+                  <td colSpan="5" className="text-center py-4 text-gray-600">
+                    No hay clientes disponibles.
+                  </td>
+                </tr>
+              ) : (
+                data.obtenerClientesVendedor.map((cliente) => (
+                  <Cliente key={cliente.id} cliente={cliente} />
+                ))
+              )}
             </tbody>
           </table>
         </div>
 
-          {children}
-        </Layout>
+        {children}
+      </Layout>
     </>
   );
 };
