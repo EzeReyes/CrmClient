@@ -43,8 +43,6 @@ const Nuevacuenta = () => {
             .min(6, 'El password debe ser de al menos 6 caracteres')
         }),
         onSubmit: async valores => {
-            // console.log('enviando');
-            // console.log(valores);
 
             const {nombre, apellido, email, password} = valores;
 

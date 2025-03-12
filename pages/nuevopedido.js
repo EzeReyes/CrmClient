@@ -92,10 +92,7 @@ const NuevoPedido = () => {
         
             // Remover lo no deseado de producto
             const pedido = productos.map(({ stock, __typename, nuevoObjeto, ...producto }) => producto);
-        
-            console.log("Datos enviados a la mutación:");
-            console.log(JSON.stringify({ cliente: id, total, pedido }, null, 2));
-        
+                
             try {
                 const { data } = await nuevoPedido({
                     variables: {

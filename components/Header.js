@@ -24,7 +24,6 @@ const Header = () => {
     const { data, loading, error } = useQuery(OBTENER_USUARIO);
 
     if(loading) return 'Cargando.....';
-    // console.log(error)
 
     if (!data || !data.obtenerUsuario) {
         router.push("/login");

@@ -20,10 +20,6 @@ const Productos = () => {
     const { data, loading, error } = useQuery(OBTENER_PRODUCTOS);
 
     if (loading) return 'Cargando ...';
-
-    // console.log(data);
-    console.log(error);
-
     
     return (
         <Layout>
@@ -34,7 +30,8 @@ const Productos = () => {
                 Nuevo Producto
             </Link>
 
-                  <table className="table-auto shadow-md mt-10 w-full w-lg">
+            <div className="overflow-x-scroll">
+                  <table className="sm:table-auto shadow-md mt-10 w-full w-lg">
                     <thead className="bg-gray-800">
                       <tr className="text-white">
                         <th className="w-1/5 py-2">Nombre</th>
@@ -54,6 +51,7 @@ const Productos = () => {
                       ))}
                     </tbody>
                   </table>
+            </div>  
         </Layout>
     )
 }

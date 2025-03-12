@@ -31,7 +31,6 @@ const MejoresClientes = () => {
     if (loading) return "Cargando..."
     const {mejoresClientes} = data;
 
-    console.log(mejoresClientes)
 
     const clienteGrafica = [];
 
@@ -42,7 +41,6 @@ const MejoresClientes = () => {
         }
     })
 
-    console.log(clienteGrafica);
 
     return (
 

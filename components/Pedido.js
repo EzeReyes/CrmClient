@@ -44,8 +44,6 @@ const Pedido = ({pedido}) => {
 
     const { id, total, cliente:{nombre, apellido, email, telefono}, estado, cliente } = pedido;
 
-    console.log(cliente)
-
     // Mutation para cambia el estado de un pedido
     const [actualizarPedido] = useMutation(ACTUALIZAR_PEDIDO);
     const [eliminarPedido] = useMutation(ELIMINAR_PEDIDO,{
@@ -93,7 +91,6 @@ const Pedido = ({pedido}) => {
                     }
                 }
             });
-            console.log(data.actualizarPedido.estado)
             setEstadoPedido(data.actualizarPedido.estado)
         } catch (error) {
             console.log(error)
